@@ -4,6 +4,8 @@ Hugo is awesome. Using it from Docker is cool. Trying to edit files sanely like 
 
 Use this to quickly and easily work on a Hugo site by adding a Cloud9 IDE interface to your Hugo instance.
 
+![Preview](./preview.png)
+
 ## Usage
 
 You must define three `ENV` variables and two port mappings so we know: what port and domain Hugo is on and what port Cloud 9 should listen at:
@@ -27,7 +29,7 @@ The ports should match inside and out (hugo and c9 both add port to urls and the
 
 If you do not have a hugo site located under this checkout at `site`, a demo one will be created for you.
 
-Once you're really happy with your site, you can use this awesome command to build an nginx container that serves the fully static built site:
+Once you're happy with the site, you can use these commands to build an nginx container that serves the full static-built site:
 
 ```
 # rebuild container, if needed
@@ -39,10 +41,10 @@ docker run -ti --rm -v `pwd`:/app -w /app/site hugo-editable hugo --verbose --de
 # Build the deployable nginx container
 docker build -t hugo-static-nginx ./nginx-static
 
-# Run it, if desired
-echo -e "Build complete, run with:\n\n    docker run --name hugo-static-nginx -ti --rm -p 80 hugo-static-nginx\n"
+# Run it!
+docker run --name hugo-static-nginx -ti --rm -p 80:80 hugo-static-nginx
 ```
 
-Both of these operations are stored in `dev.sh` and `compile.sh` 
+Both of these operations are stored in `dev.sh` and `compile.sh` for easy access.
 
 It is suggested that you clone/fork this repo and then commit back to your own fork your site as you create it.
